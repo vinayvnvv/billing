@@ -14,3 +14,18 @@ a {
 * {
   box-sizing: border-box;
 }
+.main .top {
+  display: flex;
+}
+.main .top > div {
+  flex-grow: 1;
+  border: 1px solid #d9d9d9;
+  margin-left: -1px;
+  padding: 11px;
+}
+.main .top > div:first-child {
+  width: 35%;
+}
+small {
+  font-size: 9px !important;
+}
