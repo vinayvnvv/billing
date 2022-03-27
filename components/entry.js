@@ -5,7 +5,7 @@ const Entry = ({bins, setBins, items, setItems}) => {
     // const [bins, setBins] = useState([]);
     const [boxes, setBoxes] = useState([]);
     // const [items, setItems] = useState([]);
-    const [selected, setSelected] = useState({item: null, bin: null, box: null});
+    const [selected, setSelected] = useState({item: '', bin: '', box: ''});
     // const [itemName, setItemName] = useState('');
     useEffect(() => {
         fetchEntry();
@@ -20,6 +20,7 @@ const Entry = ({bins, setBins, items, setItems}) => {
     const fetchBins = () => {
         fetch('/api/bin').then(r => r.json()).then((response) => {
             setBins(response);
+            console.log('fetchBins', response);
             if(boxes.length === 0) {
                 fetchBox(response[0]?._id);
             }
@@ -40,7 +41,7 @@ const Entry = ({bins, setBins, items, setItems}) => {
             fetch('/api/entry', {method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({...selected})})
             .then(r => r.json())
             .then(r => {
-                setSelected({item: null, bin: null, box: null})
+                // setSelected({item: null, bin: null, box: null})
                 fetchEntry();
             })
         }
@@ -56,6 +57,7 @@ const Entry = ({bins, setBins, items, setItems}) => {
         setSelected(newV)
         console.log(f, t)
     }
+    console.log(selected)
     return <div style={{padding: 11}}>
         <h1>Entries</h1>
         <div style={{padding: 11}}>
@@ -66,16 +68,19 @@ const Entry = ({bins, setBins, items, setItems}) => {
                  </div>
                 <div className="row">
                     <select className="form-select col" onChange={(e) => onChange('bin', e.target.value)}>
+                        <option value={''}>Select Bin</option>
                         {bins.map(b =>
                             <option key={b._id} value={b._id}>{b.name}</option>
                         )}
                     </select>
                     <select className="form-select col" onChange={(e) => onChange('box', e.target.value)}>
+                        <option value={''}>Select Box</option>
                         {boxes.map(b =>
                             <option key={b._id} value={b._id}>{b.name}</option>
                         )}
                     </select>
                     <select className="form-select col" onChange={(e) => onChange('item', e.target.value)}>
+                        <option value={''}>Select Item</option>
                         {items.map(b =>
                             <option key={b._id} value={b._id}>{b.name}</option>
                         )}
