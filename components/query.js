@@ -4,7 +4,7 @@ const Query = () => {
     const [result, setResult] = useState(null);
     const getResult = () => {
         setResult(null)
-        fetch('http://localhost:3000/api/query?item=' + q)
+        fetch('/api/query?item=' + q)
             .then(r => r.json())
             .then(res => {
                 setResult(res)
@@ -13,7 +13,7 @@ const Query = () => {
     }
     const reset = () => {
         if(confirm('Are you Sure?')) {
-            fetch('http://localhost:3000/api/query?reset=true')
+            fetch('/api/query?reset=true')
             .then(r => r.json())
             .then(res => {
                 location.reload()
