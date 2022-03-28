@@ -25,6 +25,7 @@ const handler = async (req, res) => {
     Entry.find(filter).populate('box').populate('item').populate('bin').exec((err, doc) =>{
         if(err){
            console.log(err)
+           return res.status(400).send(err);
         } else{
             return res.status(200).send(doc);
         }

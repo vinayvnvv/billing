@@ -1,4 +1,8 @@
 import mongoose from 'mongoose';
+require('./../models/bin')
+require('./../models/box')
+require('./../models/item')
+require('./../models/entry')
 console.log('middle')
 const connectDB = handler => async (req, res) => {
   if (mongoose.connections[0].readyState) {
